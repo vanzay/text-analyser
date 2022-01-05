@@ -1,0 +1,22 @@
+plugins {
+    id "java"
+}
+
+group = "vanzay"
+version = "1.0.0"
+sourceCompatibility = "17"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.apache.lucene:lucene-core:9.0.0"
+    implementation "org.apache.lucene:lucene-queryparser:9.0.0"
+
+    testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
+}
+
+test {
+    useJUnitPlatform()
+}
