@@ -19,7 +19,8 @@ public class TextIndex {
 
     public static Directory build(String text) throws IOException {
         Directory directory = new ByteBuffersDirectory();
-        IndexWriterConfig config = new IndexWriterConfig();
+        // StandardAnalyzer is case-insensitive, so use custom analyzer
+        IndexWriterConfig config = new IndexWriterConfig(new SimpleAnalyzer());
         try (IndexWriter indexWriter = new IndexWriter(directory, config)) {
             indexWriter.addDocument(prepareDocument(text));
         }

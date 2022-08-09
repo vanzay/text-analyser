@@ -1,13 +1,14 @@
 package vanzay.text.language;
 
-import vanzay.text.analyze.*;
+import vanzay.text.analyze.Dictionary;
+import vanzay.text.analyze.Entry;
+import vanzay.text.analyze.TextIndex;
 import vanzay.text.exception.UnsupportedLanguageException;
-import vanzay.text.normalize.Normalizer;
 import vanzay.text.normalize.Factory;
+import vanzay.text.normalize.Normalizer;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LanguageDetector {
 
@@ -21,7 +22,7 @@ public class LanguageDetector {
                 // TODO German language
                 .filter((word) -> word.getTerm().length() >= VALUABLE_WORD_MIN_LENGTH && Character.isLowerCase(word.getTerm().charAt(0)))
                 .sorted((o1, o2) -> Integer.compare(o2.getFrequency(), o1.getFrequency()))
-                .collect(Collectors.toList());
+                .toList();
 
         for (Language lang : Language.values()) {
             Normalizer normalizer = Factory.getNormalizer(lang);

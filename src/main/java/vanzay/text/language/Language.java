@@ -1,7 +1,7 @@
 package vanzay.text.language;
 
 public enum Language {
-    ENGLISH("eng");
+    ENGLISH("eng"), SPANISH("spa");
 
     private String iso3;
 

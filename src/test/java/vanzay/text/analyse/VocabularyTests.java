@@ -8,10 +8,10 @@ import vanzay.text.exception.UnsupportedLanguageException;
 import vanzay.text.language.Language;
 import vanzay.text.language.LanguageDetector;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,7 +23,7 @@ class VocabularyTests {
 
     @Test
     void buildVocabulary() throws IOException, UnsupportedLanguageException {
-        String text = readFile("/var/vio/test.txt");
+        String text = Files.readString(Paths.get("/var/vio/test.txt"), StandardCharsets.UTF_8);
 
         System.out.println("Start vocabulary building");
         printMemoryUsage();
@@ -45,17 +45,6 @@ class VocabularyTests {
         printVocabularyData(vocabulary.getUnexpectedWords());
         System.out.println("--- PROPER NOUNS -----------------------");
         printVocabularyData(vocabulary.getProperNouns());
-    }
-
-    private static String readFile(String file) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line).append("\n");
-            }
-        }
-        return sb.toString();
     }
 
     private static void printVocabularyData(Collection<Entry> entries) {
